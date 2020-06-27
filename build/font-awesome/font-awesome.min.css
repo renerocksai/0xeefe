@@ -1,0 +1,22 @@
+/*!
+ *  Font Awesome 4.1.0 by @davegandy - http://fontawesome.io - @fontawesome
+ *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
+ */@font-face{font-family:'FontAwesome';src:url('./font-awesome/fontawesome-webfont.eot?v=4.1.0');src:url('./font-awesome/fontawesome-webfont.eot?#iefix&v=4.1.0') format('embedded-opentype'),url('./font-awesome/fontawesome-webfont.woff?v=4.1.0') format('woff'),url('./font-awesome/fontawesome-webfont.ttf?v=4.1.0') format('truetype'),url('./font-awesome/fontawesome-webfont.svg?v=4.1.0#fontawesomeregular') format('svg');font-weight:normal;font-style:normal}
+ .fa{display:inline-block;font-family:FontAwesome;font-style:normal;font-weight:normal;line-height:1;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+ .fa-bold:before{content:"\f032"}
+ .fa-italic:before{content:"\f033"}
+ .fa-underline:before{content:"\f0cd"}
+ .fa-font:before{content:"\f031"}
+ .fa-link:before{content:"\f0c1"}
+ .fa-list-alt:before{content:"\f022"}
+ .fa-list:before{content:"\f03a"}
+ .fa-picture-o:before{content:"\f03e"}
+ .fa-quote-right:before{content:"\f10e"}
+ .fa-chevron-up:before{content:"\f077"}
+ .fa-header:before{content:"\f1dc"}
+.fa-align-left:before{content:"\f036"}
+.fa-align-center:before{content:"\f037"}
+.fa-align-right:before{content:"\f038"}
+.fa-align-justify:before{content:"\f039"}
+.fa-undo:before{content:"\f0e2"}
+.fa-heart:before{content:"\f004"}
