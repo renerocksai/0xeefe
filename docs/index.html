@@ -32,8 +32,10 @@
                 <textarea id="foo"></textarea>
             </div>
         </div>
-        <div class="row" style="padding-top: 15px";>
+        <div class="row" style="padding-top: 15px" ;>
             <div class="col-centered">
+                <center> <label class="text-sm">For instructions, head over to <a
+                            href="https://github.com/renerocksai/0xeefe">GitHub</a></label> </center>
                 <div class="form">
                     <div class="form-group">
                         <label for="enc_key" class="label-lg"><b> 🔐 encryption key:</b></label>
@@ -41,13 +43,15 @@
                         <label for="enc_key_conf" class="label-lg"><b> 🔐 confirm encryption key (repeat):</b></label>
                         <input type="password" class="form-control input-lg" id="enc_key_conf"></input>
                         <center>
-                    <label class="text-danger" id="passMismatch" style="display: none">Encryption keys don't match.</label>
+                            <label class="text-danger" id="passMismatch" style="display: none">Encryption keys don't
+                                match.</label>
                         </center>
                         <center>
-                        <button id="encrypt" class="btn btn-danger" disabled>save encrypted message</button>
+                            <button id="encrypt" class="btn btn-danger" disabled>save encrypted message</button>
                         </center>
                         <center>
-                    <label id="doneProtecting" class="text-success" style="display: none">Done! Check your downloads!</label>
+                            <label id="doneProtecting" class="text-success" style="display: none">Done! Check your
+                                downloads!</label>
                         </center>
                     </div>
                 </div>
@@ -56,96 +60,96 @@
 
         <div id="output"></div>
 
-    <script src="js/aes.js"></script>
-    <script src="js/pbkdf2.js"></script>
-    <script src="js/FileSaver.js"></script>
-    <script>
-        var encryptButton = document.getElementById('encrypt');
-        var passEl = document.getElementById('enc_key');
-        var passConfEl = document.getElementById('enc_key_conf');
-        var passMismatch = document.getElementById('passMismatch');
-        var doneProtecting = document.getElementById('doneProtecting');
-        
-        var templateHTML;
-        
-        function doSubmit(evt) {
-            if (!passwordsMatch()) {
-                passMismatch.style.display = "block";
-                return;
-            }
-            
-            var editor = document.getElementById('editor').contentWindow.editor;
-            var fileContents = editor.getHTML();
-            
-            var encryptedFile = encryptFile(fileContents, passEl.value);
-            
-            var salt = CryptoJS.enc.Base64.stringify(encryptedFile.salt);
-            var iv = CryptoJS.enc.Base64.stringify(encryptedFile.iv);
-            var cipherText = CryptoJS.enc.Base64.stringify(encryptedFile.data.ciphertext);
-            var encryptedJSON = JSON.stringify({salt: salt, iv: iv, data: cipherText});
-            
-            // Wrap template around encrypted data
-            
-            var encryptedDocument = templateHTML.replace("/*{{ENCRYPTED_PAYLOAD}}*/\"\"", encryptedJSON);
-            var fileBlob = new Blob([encryptedDocument], {type: "text/plain;charset=utf-8"});
-            
-            // Create filename
-            var finalName = 'encrypted_message.html'
-            
-            saveAs(fileBlob, finalName);
-            doneProtecting.style.display = "block";
-        }
-        
-        encryptButton.onclick = doSubmit;
-        
-        function encryptFile(contents, password) {
-            var salt = CryptoJS.lib.WordArray.random(256/8);
-            var iv = CryptoJS.lib.WordArray.random(128/8);
-            var key = CryptoJS.PBKDF2(password, salt, { keySize: 256/32, iterations: 100 });
-            var encrypted = CryptoJS.AES.encrypt(contents, key, {iv: iv});
-            return {salt: salt, iv: iv, data: encrypted};
-        }
-        
-        // Load template
-        
-        var xmlhttp = new XMLHttpRequest();
-                
-        xmlhttp.onreadystatechange = function() {
-            if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
-               if(xmlhttp.status == 200){
-                   templateHTML = xmlhttp.responseText;
-                   encryptButton.disabled = false;
-               }
-               else {
-                   console.log("Template not found.");
-               }
-            }
-        }
+        <script src="js/aes.js"></script>
+        <script src="js/pbkdf2.js"></script>
+        <script src="js/FileSaver.js"></script>
+        <script>
+            var encryptButton = document.getElementById('encrypt');
+            var passEl = document.getElementById('enc_key');
+            var passConfEl = document.getElementById('enc_key_conf');
+            var passMismatch = document.getElementById('passMismatch');
+            var doneProtecting = document.getElementById('doneProtecting');
 
-        xmlhttp.open("GET", "msgTemplate.html", true);
-        xmlhttp.send();
-        
-        
-        function passwordsMatch() {
-            if (passEl.value !== "" && passEl.value === passConfEl.value) {
-                return true;
-            } else {
-                return false;
+            var templateHTML;
+
+            function doSubmit(evt) {
+                if (!passwordsMatch()) {
+                    passMismatch.style.display = "block";
+                    return;
+                }
+
+                var editor = document.getElementById('editor').contentWindow.editor;
+                var fileContents = editor.getHTML();
+
+                var encryptedFile = encryptFile(fileContents, passEl.value);
+
+                var salt = CryptoJS.enc.Base64.stringify(encryptedFile.salt);
+                var iv = CryptoJS.enc.Base64.stringify(encryptedFile.iv);
+                var cipherText = CryptoJS.enc.Base64.stringify(encryptedFile.data.ciphertext);
+                var encryptedJSON = JSON.stringify({salt: salt, iv: iv, data: cipherText});
+
+                // Wrap template around encrypted data
+
+                var encryptedDocument = templateHTML.replace("/*{{ENCRYPTED_PAYLOAD}}*/\"\"", encryptedJSON);
+                var fileBlob = new Blob([encryptedDocument], {type: "text/plain;charset=utf-8"});
+
+                // Create filename
+                var finalName = 'encrypted_message.html'
+
+                saveAs(fileBlob, finalName);
+                doneProtecting.style.display = "block";
             }
-        }
-        
-        passEl.onkeyup = passConfEl.onkeyup = function () {
-            if (passwordsMatch()) {
-                passMismatch.style.display = "none";
-                encryptButton.disabled = false;
-            } else {
-                passMismatch.style.display = "block";
-                encryptButton.disabled = true;
+
+            encryptButton.onclick = doSubmit;
+
+            function encryptFile(contents, password) {
+                var salt = CryptoJS.lib.WordArray.random(256 / 8);
+                var iv = CryptoJS.lib.WordArray.random(128 / 8);
+                var key = CryptoJS.PBKDF2(password, salt, {keySize: 256 / 32, iterations: 100});
+                var encrypted = CryptoJS.AES.encrypt(contents, key, {iv: iv});
+                return {salt: salt, iv: iv, data: encrypted};
             }
-        }
-        
-        if (window.location.protocol === "file:") alert("Please load this tool using a web server - it does not work when loaded directly from the index.html file. Thanks!");
-    </script>
+
+            // Load template
+
+            var xmlhttp = new XMLHttpRequest();
+
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == XMLHttpRequest.DONE) {
+                    if (xmlhttp.status == 200) {
+                        templateHTML = xmlhttp.responseText;
+                        encryptButton.disabled = false;
+                    }
+                    else {
+                        console.log("Template not found.");
+                    }
+                }
+            }
+
+            xmlhttp.open("GET", "msgTemplate.html", true);
+            xmlhttp.send();
+
+
+            function passwordsMatch() {
+                if (passEl.value !== "" && passEl.value === passConfEl.value) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
+            passEl.onkeyup = passConfEl.onkeyup = function () {
+                if (passwordsMatch()) {
+                    passMismatch.style.display = "none";
+                    encryptButton.disabled = false;
+                } else {
+                    passMismatch.style.display = "block";
+                    encryptButton.disabled = true;
+                }
+            }
+
+            if (window.location.protocol === "file:") alert("Please load this tool using a web server - it does not work when loaded directly from the index.html file. Thanks!");
+        </script>
 </body>
 
 </html>
