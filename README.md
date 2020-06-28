@@ -28,11 +28,11 @@ The only way to ensure personal privacy is to take encryption into your own hand
 Use your e-mail client. I use the webmail version of Outlook.
 
 - I hit reply on an e-mail
-- instead of replying there, I just select everything with CTRL + A:
+- instead of replying there, I just select everything with CTRL + A and copy it:
   - ![](docs/ctrl_a.png)  
   -   
 
-- then I head over to [0xeefe](https://renerocksai.github.io/0xeefe/) and type my reply there, if I haven't already
+- then I head over to [0xeefe](https://renerocksai.github.io/0xeefe/), paste with CTRL + C, and type my reply there, if I haven't already
   - ![](docs/demo_edit.png)
 - I enter the encryption key, twice
 - hit "save encrypted message"
