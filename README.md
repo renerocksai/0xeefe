@@ -4,7 +4,7 @@
 
 - Runs entirely in your browser
 - No data leaves your browser **ever**!
-    - only the encrypted message, that is stored on your harddisk in the downloads folder of your browser.
+    - only the encrypted message, when it is stored on your harddisk or mobile device, in the downloads folder of your browser.
 - just try it at [https://renerocksai.github.io/0xeefe](https://renerocksai.github.io/0xeefe)
 - no need to trust me!
     - have it audited!
