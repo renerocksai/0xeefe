@@ -31,11 +31,11 @@ The only way to ensure personal privacy is to take encryption into your own hand
 Use your e-mail client. I use the webmail version of Outlook.
 
 - I hit reply on an e-mail
-- instead of replying there, I just select everything with CTRL + A and copy it:
+- instead of replying there, I just select everything with CTRL + A and copy it with CTRL + C:
   - ![](docs/ctrl_a.png)  
   -   
 
-- then I head over to [0xeefe](https://renerocksai.github.io/0xeefe/), paste with CTRL + C, and type my reply there, if I haven't already
+- then I head over to [0xeefe](https://renerocksai.github.io/0xeefe/), paste with CTRL + V, and type my reply there, if I haven't already
   - ![](docs/demo_edit.png)
 - I enter the encryption key, twice
 - hit "save encrypted message"
@@ -50,5 +50,6 @@ Encrypted messages are: encrypted. They are not just password-protected. So anyo
 
 # To-do
 - [ ] might turn this into a browser plugin
-- [ ] automatically convert all pasted images to data URLs so they get encrypted, too
-    - since images inserted into web mail clients typically get turned into magic URLs anyway, this is not the greatest of concerns at the moment.
+- [ ] automatically convert all pasted image URLs to data URLs so they get encrypted, too
+    - Outlook inserts them as data URLs for us! Nothing to be done!
+    - If other webmail clients upload and turn the images into magic URLs, that's pretty good, too.
